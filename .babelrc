@@ -5,11 +5,16 @@
   ],
   "plugins": [
     [
+      "transform-runtime",
       "component",
       {
         "libraryName": "weex-ui",
         "libDir": "packages",
-        "style": false
+        "style": false,
+        "helpers": false,
+        "polyfill": false,
+        "regenerator": true,
+        "moduleName": "babel-runtime"
       }
     ]
   ]
