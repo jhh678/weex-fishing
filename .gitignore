@@ -2,3 +2,5 @@
 /dist
 /.vscode
 /release
+.idea
+build

@@ -5,6 +5,7 @@
     <HelloWorld/>
     <wxc-button text="Open Popup" @wxcButtonClicked="buttonClicked"></wxc-button>
     <wxc-popup width="500" pos="left" :show="isShow" @wxcPopupOverlayClicked="overlayClicked"></wxc-popup>
+    <wxc-button text="Jump" @wxcButtonClicked="jumpClicked"></wxc-button>
   </div>
 </template>
 
@@ -14,6 +15,10 @@
     WxcButton,
     WxcPopup
   } from 'weex-ui'
+
+  var navigator = weex.requireModule('navigator')
+  var modal = weex.requireModule('modal')
+
   export default {
     name: 'App',
     components: {
@@ -33,6 +38,16 @@
       },
       overlayClicked() {
         this.isShow = false
+      },
+      jumpClicked(event) {
+        navigator.push({
+          url: 'views/recycle-list-demo.js',
+          animated: 'true'
+        }, event => {
+          modal.toast({
+            message: 'callback: ' + event
+          })
+        })
       }
     }
   }
