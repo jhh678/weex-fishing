@@ -22,8 +22,8 @@ module.exports = function (config) {
     webpackMiddleware: {
       noInfo: true
     },
-    singleRun: false,
-    browserConsoleLogOptions: {level: 'error', format: '%b %T: %m', terminal: false},
+    singleRun:false,
+    browserConsoleLogOptions: {level: "error", format: "%b %T: %m", terminal: false},
     coverageReporter: {
       dir: './coverage',
       reporters: [
