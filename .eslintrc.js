@@ -9,7 +9,8 @@ module.exports = {
     browser: true
   },
   globals: {
-    weex: true
+    weex: true,
+    Vue: true
   },
   extends: [
     // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
@@ -46,6 +47,7 @@ module.exports = {
     'func-call-spacing': 0,
     'no-unexpected-multiline': 0,
     'no-useless-escape': 0,
-    'one-var': 0
+    'one-var': 0,
+    'no-multiple-empty-lines': 0
   }
 }

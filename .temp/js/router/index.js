@@ -1,12 +1,14 @@
 import Vue from 'vue'
-/*global Vue*/
-import Vue from 'vue'
+/**
+ * Created by jhh678 on 2018/7/12.
+ */
 import Router from 'vue-router'
-import Home from '@/views/home.vue'
+import ViewHome from '../../views/home.vue'
 
 Vue.use(Router)
 
-module.exports = new Router({
+export default new Router({
+  // mode: 'abstract',
   routes: [{
       path: '/',
       redirect: '/home'
@@ -14,7 +16,7 @@ module.exports = new Router({
     {
       path: '/home',
       name: 'Home',
-      component: Home
+      component: ViewHome
     }
   ]
 })
