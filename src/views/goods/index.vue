@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <router-view></router-view>
+    <text>所有商品</text>
   </div>
 </template>
 

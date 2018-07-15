@@ -4,7 +4,7 @@ import weex from 'weex-vue-render'
 
 weex.init(Vue)
 /* weex initialized here, please do not move this line */
-const router = require('@/router.js')
+const router = require('./js/router/index')
 const App = require('@/index.vue')
 
 /* eslint-disable no-new */

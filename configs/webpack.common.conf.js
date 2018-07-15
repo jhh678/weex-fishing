@@ -114,8 +114,7 @@ const webConfig = {
    */
   module: {
     // webpack 2.0 
-    rules: useEslint.concat([
-      {
+    rules: useEslint.concat([{
         test: /\.js$/,
         use: [{
           loader: 'babel-loader'
@@ -126,7 +125,10 @@ const webConfig = {
         test: /\.vue(\?[^?]+)?$/,
         use: [{
           loader: 'vue-loader',
-          options: Object.assign(vueLoaderConfig({useVue: true, usePostCSS: false}), {
+          options: Object.assign(vueLoaderConfig({
+            useVue: true,
+            usePostCSS: false
+          }), {
             /**
              * important! should use postTransformNode to add $processStyle for
              * inline style prefixing.
@@ -135,7 +137,7 @@ const webConfig = {
             postcss: [
               // to convert weex exclusive styles.
               require('postcss-plugin-weex')(),
-              require('autoprefixer')({
+              require('postcss-cssnext')({
                 browsers: ['> 0.1%', 'ios >= 8', 'not ie < 12']
               }),
               require('postcss-plugin-px2rem')({
@@ -145,15 +147,13 @@ const webConfig = {
                 minPixelValue: 1.01
               })
             ],
-            compilerModules: [
-              {
-                postTransformNode: el => {
-                  // to convert vnode for weex components.
-                  require('weex-vue-precompiler')()(el)
-                }
+            compilerModules: [{
+              postTransformNode: el => {
+                // to convert vnode for weex components.
+                require('weex-vue-precompiler')()(el)
               }
-            ]
-            
+            }]
+
           })
         }],
         exclude: config.excludeModuleReg
@@ -190,8 +190,7 @@ const weexConfig = {
    * See: http://webpack.github.io/docs/configuration.html#module
    */
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.js$/,
         use: [{
           loader: 'babel-loader'
@@ -202,7 +201,9 @@ const weexConfig = {
         test: /\.vue(\?[^?]+)?$/,
         use: [{
           loader: 'weex-loader',
-          options: vueLoaderConfig({useVue: false})
+          options: vueLoaderConfig({
+            useVue: false
+          })
         }],
         exclude: config.excludeModuleReg
       }
@@ -215,11 +216,11 @@ const weexConfig = {
    */
   plugins: plugins,
   /*
-  * Include polyfills or mocks for various node stuff
-  * Description: Node configuration
-  *
-  * See: https://webpack.github.io/docs/configuration.html#node
-  */
+   * Include polyfills or mocks for various node stuff
+   * Description: Node configuration
+   *
+   * See: https://webpack.github.io/docs/configuration.html#node
+   */
   node: config.nodeConfiguration
 };
 

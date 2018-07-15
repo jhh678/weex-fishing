@@ -1,21 +1,18 @@
-/**
- * Created by jhh678 on 2018/7/12.
- */
+/* global Vue */
 import Router from 'vue-router'
-import Home from '@/views/home.vue'
+import Index from '@/views/index.vue'
 
 Vue.use(Router)
 
-export default new Router({
-  // mode: 'abstract',
+module.exports = new Router({
   routes: [{
       path: '/',
-      redirect: '/home'
+      redirect: '/index'
     },
     {
-      path: '/home',
-      name: 'Home',
-      component: Home
+      path: '/index',
+      name: 'Index',
+      component: Index
     }
   ]
 })
