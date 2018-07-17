@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="header">
-      <wxc-minibar title="首页" @wxcMinibarLeftButtonClicked="minibarLeftButtonClick" @wxcMinibarRightButtonClicked="minibarRightButtonClick">
+      <wxc-minibar title="首页" :use-default-return="false" @wxcMinibarLeftButtonClicked="minibarLeftButtonClick" @wxcMinibarRightButtonClicked="minibarRightButtonClick">
         <wxc-icon name="scanning" slot="left"></wxc-icon>
         <div slot="right" class="header-right">
           <wxc-icon name="map"></wxc-icon>
@@ -14,7 +14,7 @@
         :is-tab-view="isTabView" :tab-page-height="tabPageHeight" @wxcTabPageCurrentTabSelected="wxcTabPageCurrentTabSelected">
         <list v-for="(v,index) in tabPageList" :key="index" class="tab-page-item-container" :style="{ height: (tabPageHeight - tabPageStyles.height) + 'px' }">
           <cell class="border-cell"></cell>
-          <slider class="slider" interval="3000" auto-play="true" show-indicators="true">
+          <slider class="slider" interval="3000" :auto-play="true" :show-indicators="true">
             <div class="frame" v-for="(img, index) in imageList" :key="index">
               <image class="slider-image" resize="cover" :src="img.src"></image>
             </div>
@@ -48,6 +48,8 @@
     BindEnv
   } from 'weex-ui'
   import WxcItem from '@/components/wxc-item.vue'
+  const modal = weex.requireModule('modal')
+  const ttyScan = weex.requireModule('tty-scan')
 
   export default {
     name: 'HomeIndex',
@@ -109,7 +111,15 @@
       }, 1000)
     },
     methods: {
-      minibarLeftButtonClick() {},
+      minibarLeftButtonClick() {
+        ttyScan.scanCode(res => {
+          // res 即为返回的数据
+          modal.toast({
+            message: res.data,
+            duration: 3
+          })
+        })
+      },
       minibarRightButtonClick() {
         this.$refs['wxcCityPush'].show()
       },
@@ -162,7 +172,6 @@
   .frame {
     width: 750px;
     height: 360px;
-    position: relative;
   }
 
   .border-cell {
@@ -193,8 +202,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    bottom: 0;
+    right: 0;
   }
 
 </style>

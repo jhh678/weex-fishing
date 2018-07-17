@@ -9,7 +9,7 @@
     <div class="content">
       <div class="user-info-wrap">
         <div class="ueser-avatar">
-          <image style="width: 100px;height: 100px;background-color: #ccc;" :src="userInfo.avatar" resize="cover"></image>
+          <image style="width:100px;height:100px;background-color:#ccc;" :src="userInfo.avatar" resize="cover"></image>
         </div>
         <div class="user-name-type">
           <text class="user-name">{{userInfo.name}}</text>
@@ -30,9 +30,9 @@
       <div class="panel">
         <text class="title">我的订单</text>
         <div class="order-status">
-          <div class="order-status-item" v-for="(status, index) of orderStatus" :key="index">
-            <wxc-icon :name="status.iconName"></wxc-icon>
-            <text>{{status.name}}</text>
+          <div class="order-status-item" v-for="(status, index) of orderStatus" :key="index" @click="openOrderList(index)">
+            <wxc-icon style="{text-align: center}" :name="status.iconName"></wxc-icon>
+            <text class="text">{{status.name}}</text>
           </div>
         </div>
       </div>
@@ -84,9 +84,15 @@
         }]
       }
     },
-    created() {},
     methods: {
-
+      openOrderList(index) {
+        this.$router.push({
+          path: '/my/order-list',
+          query: {
+            index: index
+          }
+        })
+      }
     }
   }
 
@@ -100,13 +106,13 @@
   .user-info-wrap {
     flex-direction: row;
     align-items: center;
+    width: 750px;
     height: 240px;
     padding: 0 30px;
     background-color: rgb(255, 201, 0);
   }
 
   .ueser-avatar {
-    overflow: hidden;
     border-radius: 50%;
     margin-right: 24px;
   }
@@ -130,6 +136,7 @@
   }
 
   .panel {
+    width: 750px;
     margin-bottom: 20px;
     background-color: #fff;
   }
@@ -138,22 +145,37 @@
     flex-direction: row;
     align-items: center;
     height: 120px;
+  }
 
-    & .my-wallet {
-      width: 240px;
-      height: 120px;
-      line-height: 120px;
-      text-align: center;
-      color: #333;
-      border-right-style: solid;
-      border-right-width: 1px;
-      border-right-color: #ddd;
-    }
+  .my-wallet {
+    width: 240px;
+    height: 120px;
+    line-height: 120px;
+    text-align: center;
+    color: #333;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-right-color: #ddd;
+  }
 
-    & .my-integral {
-      flex: 1;
-      align-items: center;
-    }
+  .my-integral {
+    flex: 1;
+    align-items: center;
+  }
+
+  .order-status {
+    flex-direction: row;
+    align-items: center;
+    height: 120px;
+    line-height: 120px;
+  }
+
+  .order-status-item {
+    flex: 1;
+  }
+
+  .order-status-item .text {
+    text-align: center;
   }
 
 </style>

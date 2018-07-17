@@ -1,4 +1,4 @@
-/*global Vue*/
+/* global Vue */
 
 /* weex initialized here, please do not move this line */
 const router = require('./js/router/index')
