@@ -3,7 +3,7 @@
 
 <template>
   <div class="header-bar">
-    <wxc-minibar :title="title" :right-text="rightText" :use-default-return="useDefaultReturn" @wxcMinibarLeftButtonClicked="leftButtonClick"
+    <wxc-minibar :title="title" :right-text="rightText" :use-default-return="useDefaultReturn" @wxcMinibarLeftButtonClicked="leftHandle"
       @wxcMinibarRightButtonClicked="rightButtonClick"></wxc-minibar>
   </div>
 </template>
@@ -24,7 +24,7 @@
       },
       leftButtonClick: {
         type: Function,
-        default: () => {}
+        default: null
       },
       rightButtonClick: {
         type: Function,
@@ -36,11 +36,19 @@
       },
       useDefaultReturn: {
         type: Boolean,
-        default: true
+        default: false
       }
     },
     data: () => ({}),
-    methods: {}
+    methods: {
+      leftHandle() {
+        if (this.leftButtonClick) {
+          this.leftButtonClick()
+        } else {
+          this.$router.back()
+        }
+      }
+    }
   }
 
 </script>

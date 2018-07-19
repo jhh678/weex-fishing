@@ -3,7 +3,7 @@
 
 <template>
   <div class="wxc-item">
-    <image :src="image" class="item-image" resize="cover"></image>
+    <image :src="image" class="item-image" resize="cover" />
 
     <div class="category-tag" v-if="categoryTag">
       <text class="tag-text">{{categoryTag}}</text>

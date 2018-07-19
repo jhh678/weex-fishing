@@ -1,5 +1,7 @@
 <template>
   <div class="wrapper">
+    <wxc-city ref="wxcCityPush" class="wxc-city" :currentLocation="location" :cityStyleType="cityStyleType" @wxcCityItemSelected="citySelect"
+      @wxcCityOnInput="onInput"></wxc-city>
     <div class="header">
       <wxc-minibar title="首页" :use-default-return="false" @wxcMinibarLeftButtonClicked="minibarLeftButtonClick" @wxcMinibarRightButtonClicked="minibarRightButtonClick">
         <wxc-icon name="scanning" slot="left"></wxc-icon>
@@ -14,11 +16,13 @@
         :is-tab-view="isTabView" :tab-page-height="tabPageHeight" @wxcTabPageCurrentTabSelected="wxcTabPageCurrentTabSelected">
         <list v-for="(v,index) in tabPageList" :key="index" class="tab-page-item-container" :style="{ height: (tabPageHeight - tabPageStyles.height) + 'px' }">
           <cell class="border-cell"></cell>
-          <slider class="slider" interval="3000" :auto-play="true" :show-indicators="true">
-            <div class="frame" v-for="(img, index) in imageList" :key="index">
-              <image class="slider-image" resize="cover" :src="img.src"></image>
-            </div>
-          </slider>
+          <cell>
+            <slider class="slider" interval="3000" :auto-play="true" :show-indicators="true">
+              <div class="frame" v-for="(img, index) in imageList" :key="index">
+                <image class="slider-image" resize="cover" :src="img.src" />
+              </div>
+            </slider>
+          </cell>
           <cell v-for="(demo,key) in v" class="cell" :key="key" :accessible="true" aria-label="卡片测试｜四川成都出发到九寨沟牟尼沟 温泉3天2晚纯玩跟团旅游,价格219元">
             <wxc-pan-item url="https://h5.m.taobao.com/trip/ticket/detail/index.html?scenicId=2675" @wxcPanItemPan="wxcPanItemPan">
               <wxc-item image="https://gw.alicdn.com/i1/2935198750/TB26GMgeOC9MuFjSZFoXXbUzFXa_!!2935198750.jpg" :image-text="tabPageTitles[index].title"
@@ -28,8 +32,6 @@
         </list>
       </wxc-tab-page>
     </div>
-    <wxc-city ref="wxcCityPush" class="wxc-city" :currentLocation="location" :cityStyleType="cityStyleType" @wxcCityItemSelected="citySelect"
-      @wxcCityOnInput="onInput"></wxc-city>
   </div>
 </template>
 

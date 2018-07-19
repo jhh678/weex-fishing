@@ -16,7 +16,4 @@
 
 </script>
 
-<style scoped>
-
-
-</style>
+<style src='./css/common.css' />

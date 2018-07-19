@@ -1,6 +1,15 @@
 .wrapper {
-  justify-content: center;
-  align-items: center;
+  width: 750px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background-color: #fafafa;
-  padding: 50px;
+  font-size: 32px;
+  font-family: BlinkMacSystemFont, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.hover-shadow:active {
+  /* box-shadow: 0 0 0 1000px rgba(0, 0, 0, .1) inset; */
 }
