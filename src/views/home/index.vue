@@ -1,7 +1,5 @@
 <template>
   <div class="wrapper">
-    <wxc-city ref="wxcCityPush" class="wxc-city" :currentLocation="location" :cityStyleType="cityStyleType" @wxcCityItemSelected="citySelect"
-      @wxcCityOnInput="onInput"></wxc-city>
     <div class="header">
       <wxc-minibar title="首页" :use-default-return="false" @wxcMinibarLeftButtonClicked="minibarLeftButtonClick" @wxcMinibarRightButtonClicked="minibarRightButtonClick">
         <wxc-icon name="scanning" slot="left"></wxc-icon>
@@ -32,6 +30,8 @@
         </list>
       </wxc-tab-page>
     </div>
+    <wxc-city ref="wxcCityPush" class="wxc-city" :currentLocation="location" :cityStyleType="cityStyleType" @wxcCityItemSelected="citySelect"
+      @wxcCityOnInput="onInput"></wxc-city>
   </div>
 </template>
 
@@ -156,6 +156,11 @@
     flex-direction: row;
   }
 
+  .content {
+    width: 750px;
+    flex: 1;
+  }
+
   .tab-page-item-container {
     width: 750px;
     background-color: #f2f3f4;
@@ -189,15 +194,6 @@
 
   .cell {
     background-color: #ffffff;
-  }
-
-  .content {
-    width: 750px;
-    height: 300px;
-    border-bottom-width: 1px;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
   }
 
   .wxc-city {

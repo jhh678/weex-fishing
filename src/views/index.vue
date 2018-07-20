@@ -1,12 +1,10 @@
 <template>
   <div class="wrapper">
-    <div class="content">
-      <wxc-tab-bar :tab-titles="tabBarTitles" :tab-styles="tabBarStyles" title-type="icon" @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
-        <div v-for="item of tabPageList" :key="item" class="bar-bar-item-container" :style="contentStyle">
-          <div :is="item"></div>
-        </div>
-      </wxc-tab-bar>
-    </div>
+    <wxc-tab-bar :tab-titles="tabBarTitles" :tab-styles="tabBarStyles" title-type="icon" @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
+      <div v-for="(item, index) in tabPageList" :key="index" class="bar-bar-item-container" :style="contentStyle">
+        <div :is="item"></div>
+      </div>
+    </wxc-tab-bar>
   </div>
 </template>
 
@@ -59,9 +57,19 @@
 
 </script>
 
-<style scoped>
-  .content {
-    flex: 1;
+<style scoped lang="postcss">
+  @import "../css/common.css";
+
+  .wrapper {
+    width: 750px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fafafa;
+    font-size: 32px;
+    font-family: BlinkMacSystemFont, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .bar-bar-item-container {

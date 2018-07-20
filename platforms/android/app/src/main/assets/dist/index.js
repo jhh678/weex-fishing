@@ -4367,8 +4367,16 @@ module.exports = __vue_exports__
 /***/ (function(module, exports) {
 
 module.exports = {
-  "content": {
-    "flex": 1
+  "wrapper": {
+    "width": "750",
+    "position": "absolute",
+    "top": 0,
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "backgroundColor": "#fafafa",
+    "fontSize": "32",
+    "fontFamily": "BlinkMacSystemFont, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif"
   },
   "bar-bar-item-container": {
     "width": "750",
@@ -4444,8 +4452,6 @@ module.exports = {
     }
   }
 }; //
-//
-//
 //
 //
 //
@@ -5546,6 +5552,10 @@ module.exports = {
   "header-right": {
     "flexDirection": "row"
   },
+  "content": {
+    "width": "750",
+    "flex": 1
+  },
   "tab-page-item-container": {
     "width": "750",
     "backgroundColor": "#f2f3f4"
@@ -5574,14 +5584,6 @@ module.exports = {
   },
   "cell": {
     "backgroundColor": "#ffffff"
-  },
-  "content": {
-    "width": "750",
-    "height": "300",
-    "borderBottomWidth": "1",
-    "alignItems": "center",
-    "justifyContent": "center",
-    "flex": 1
   },
   "wxc-city": {
     "position": "fixed",
@@ -10973,18 +10975,7 @@ module.exports.render._withStripped = true
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: ["wrapper"]
-  }, [_c('wxc-city', {
-    ref: "wxcCityPush",
-    staticClass: ["wxc-city"],
-    attrs: {
-      "currentLocation": _vm.location,
-      "cityStyleType": _vm.cityStyleType
-    },
-    on: {
-      "wxcCityItemSelected": _vm.citySelect,
-      "wxcCityOnInput": _vm.onInput
-    }
-  }), _c('div', {
+  }, [_c('div', {
     staticClass: ["header"]
   }, [_c('wxc-minibar', {
     attrs: {
@@ -11091,7 +11082,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       })], 1)], 1)
     })], 2)
-  }))], 1)], 1)
+  }))], 1), _c('wxc-city', {
+    ref: "wxcCityPush",
+    staticClass: ["wxc-city"],
+    attrs: {
+      "currentLocation": _vm.location,
+      "cityStyleType": _vm.cityStyleType
+    },
+    on: {
+      "wxcCityItemSelected": _vm.citySelect,
+      "wxcCityOnInput": _vm.onInput
+    }
+  })], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 
@@ -11318,6 +11320,17 @@ module.exports = __vue_exports__
 /***/ (function(module, exports) {
 
 module.exports = {
+  "wrapper": {
+    "width": "750",
+    "position": "absolute",
+    "top": 0,
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "backgroundColor": "#fafafa",
+    "fontSize": "32",
+    "fontFamily": "BlinkMacSystemFont, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif"
+  },
   "content": {
     "flex": 1
   },
@@ -12059,8 +12072,6 @@ module.exports.render._withStripped = true
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: ["wrapper"]
-  }, [_c('div', {
-    staticClass: ["content"]
   }, [_c('wxc-tab-bar', {
     attrs: {
       "tabTitles": _vm.tabBarTitles,
@@ -12070,15 +12081,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "wxcTabBarCurrentTabSelected": _vm.wxcTabBarCurrentTabSelected
     }
-  }, _vm._l((_vm.tabPageList), function(item) {
+  }, _vm._l((_vm.tabPageList), function(item, index) {
     return _c('div', {
-      key: item,
+      key: index,
       staticClass: ["bar-bar-item-container"],
       style: _vm.contentStyle
     }, [_c(item, {
       tag: "div"
     })])
-  }))], 1)])
+  }))], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 

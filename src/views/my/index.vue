@@ -181,7 +181,19 @@
 
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
+  .wrapper {
+    width: 750px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fafafa;
+    font-size: 32px;
+    font-family: BlinkMacSystemFont, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
   .content {
     flex: 1;
     overflow: auto;
