@@ -1,0 +1,104 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/activity_scan_top_container"
+        android:layout_width="match_parent"
+        android:layout_height="61.09dp"
+        android:background="#A8000000">
+
+        <ImageView
+            android:id="@+id/activity_scan_back_iv"
+            android:layout_width="61.09dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+            android:text="扫一扫"
+            android:textColor="#cdcdcd"
+            android:textSize="18.91sp"/>
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/activity_scan_bottom_container"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:layout_alignParentBottom="true"
+        android:background="#99000000"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/activity_scan_open_light_container_ll"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/activity_scan_light_iv"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_close"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="打开闪光灯"
+                android:textColor="#ffffff"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_scan_select_pic_container_ll"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_photo"
+                android:tint="#ffffffff"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="相册"
+                android:textColor="#ffffff"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <com.journeyapps.barcodescanner.DecoratedBarcodeView
+        android:id="@+id/zxing_barcode_scanner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/activity_scan_bottom_container"
+        android:layout_below="@id/activity_scan_top_container"
+        app:zxing_scanner_layout="@layout/barcode_scanner_view">
+    </com.journeyapps.barcodescanner.DecoratedBarcodeView>
+
+
+</RelativeLayout>
+    <!--作者：MeloDev
+    链接：https://www.jianshu.com/p/f862b73d07f7
+    來源：简书
+    简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。-->
