@@ -57,20 +57,8 @@
 
 </script>
 
-<style scoped lang="postcss">
-  @import "../css/common.css";
-
-  .wrapper {
-    width: 750px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #fafafa;
-    font-size: 32px;
-    font-family: BlinkMacSystemFont, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  }
+<style scoped lang="stylus">
+  @import "../css/common.styl";
 
   .bar-bar-item-container {
     width: 750px;

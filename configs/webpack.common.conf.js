@@ -137,7 +137,7 @@ const webConfig = {
             postcss: [
               // to convert weex exclusive styles.
               require('postcss-plugin-weex')(),
-              require('postcss-cssnext')({
+              require('autoprefixer')({
                 browsers: ['> 0.1%', 'ios >= 8', 'not ie < 12']
               }),
               require('postcss-plugin-px2rem')({

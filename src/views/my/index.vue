@@ -181,18 +181,8 @@
 
 </script>
 
-<style scoped lang="postcss">
-  .wrapper {
-    width: 750px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #fafafa;
-    font-size: 32px;
-    font-family: BlinkMacSystemFont, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  }
+<style scoped lang="stylus">
+  @import "../../css/common.styl";
 
   .content {
     flex: 1;
@@ -204,7 +194,10 @@
     align-items: center;
     width: 750px;
     height: 240px;
-    padding: 0 30px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 30px;
+    padding-right: 30px;
     background-color: rgb(255, 201, 0);
   }
 
@@ -247,7 +240,10 @@
   .panel .title {
     height: 80px;
     line-height: 80px;
-    padding: 0 30px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 30px;
+    padding-right: 30px;
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: #ddd;
@@ -273,6 +269,7 @@
   .my-integral {
     flex: 1;
     align-items: center;
+    justify-content: center;
   }
 
   .order-status {
@@ -296,7 +293,11 @@
   .page-entry-item {
     flex-direction: row;
     align-items: center;
-    padding: 30px;
+    justify-content: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: #ddd;
@@ -304,7 +305,10 @@
 
   .page-entry-item .entry-name {
     flex: 1;
-    padding: 0 24px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 24px;
+    padding-right: 24px;
     color: #333;
   }
 

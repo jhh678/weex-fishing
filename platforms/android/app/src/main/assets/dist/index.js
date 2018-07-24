@@ -4326,7 +4326,7 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(13)
+__vue_styles__.push(__webpack_require__(136)
 )
 
 /* script */
@@ -4363,30 +4363,7 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
-module.exports = {
-  "wrapper": {
-    "width": "750",
-    "position": "absolute",
-    "top": 0,
-    "bottom": 0,
-    "left": 0,
-    "right": 0,
-    "backgroundColor": "#fafafa",
-    "fontSize": "32",
-    "fontFamily": "BlinkMacSystemFont, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif"
-  },
-  "bar-bar-item-container": {
-    "width": "750",
-    "backgroundColor": "#f2f3f4",
-    "alignItems": "center",
-    "justifyContent": "center"
-  }
-}
-
-/***/ }),
+/* 13 */,
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5508,7 +5485,7 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(24)
+__vue_styles__.push(__webpack_require__(140)
 )
 
 /* script */
@@ -5545,56 +5522,7 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 24 */
-/***/ (function(module, exports) {
-
-module.exports = {
-  "header-right": {
-    "flexDirection": "row"
-  },
-  "content": {
-    "width": "750",
-    "flex": 1
-  },
-  "tab-page-item-container": {
-    "width": "750",
-    "backgroundColor": "#f2f3f4"
-  },
-  "slider": {
-    "width": "750",
-    "height": "360"
-  },
-  "slider-image": {
-    "width": "750",
-    "height": "360"
-  },
-  "frame": {
-    "width": "750",
-    "height": "360"
-  },
-  "border-cell": {
-    "backgroundColor": "#f2f3f4",
-    "width": "750",
-    "height": "24",
-    "alignItems": "center",
-    "justifyContent": "center",
-    "borderBottomWidth": "1",
-    "borderStyle": "solid",
-    "borderColor": "#e0e0e0"
-  },
-  "cell": {
-    "backgroundColor": "#ffffff"
-  },
-  "wxc-city": {
-    "position": "fixed",
-    "top": 0,
-    "left": 0,
-    "bottom": 0,
-    "right": 0
-  }
-}
-
-/***/ }),
+/* 24 */,
 /* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5642,7 +5570,6 @@ var _wxcItem2 = _interopRequireDefault(_wxcItem);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } } //
-//
 //
 //
 //
@@ -10975,6 +10902,19 @@ module.exports.render._withStripped = true
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: ["wrapper"]
+  }, [_c('wxc-city', {
+    ref: "wxcCityPush",
+    staticClass: ["wxc-city"],
+    attrs: {
+      "currentLocation": _vm.location,
+      "cityStyleType": _vm.cityStyleType
+    },
+    on: {
+      "wxcCityItemSelected": _vm.citySelect,
+      "wxcCityOnInput": _vm.onInput
+    }
+  }), _c('div', {
+    staticClass: ["page"]
   }, [_c('div', {
     staticClass: ["header"]
   }, [_c('wxc-minibar', {
@@ -11082,18 +11022,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       })], 1)], 1)
     })], 2)
-  }))], 1), _c('wxc-city', {
-    ref: "wxcCityPush",
-    staticClass: ["wxc-city"],
-    attrs: {
-      "currentLocation": _vm.location,
-      "cityStyleType": _vm.cityStyleType
-    },
-    on: {
-      "wxcCityItemSelected": _vm.citySelect,
-      "wxcCityOnInput": _vm.onInput
-    }
-  })], 1)
+  }))], 1)])], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 
@@ -11279,7 +11208,7 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(111)
+__vue_styles__.push(__webpack_require__(137)
 )
 
 /* script */
@@ -11316,100 +11245,7 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 111 */
-/***/ (function(module, exports) {
-
-module.exports = {
-  "wrapper": {
-    "width": "750",
-    "position": "absolute",
-    "top": 0,
-    "bottom": 0,
-    "left": 0,
-    "right": 0,
-    "backgroundColor": "#fafafa",
-    "fontSize": "32",
-    "fontFamily": "BlinkMacSystemFont, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif"
-  },
-  "content": {
-    "flex": 1
-  },
-  "user-info-wrap": {
-    "flexDirection": "row",
-    "alignItems": "center",
-    "width": "750",
-    "height": "240",
-    "paddingTop": 0,
-    "paddingRight": "30",
-    "paddingBottom": 0,
-    "paddingLeft": "30",
-    "backgroundColor": "rgb(255,201,0)"
-  },
-  "ueser-avatar": {
-    "borderRadius": "100",
-    "marginRight": "24",
-    "overflow": "hidden"
-  },
-  "user-name-type": {
-    "flex": 1,
-    "flexDirection": "column"
-  },
-  "user-name": {
-    "color": "#ffffff"
-  },
-  "user-type": {
-    "flexDirection": "row"
-  },
-  "panel": {
-    "width": "750",
-    "marginBottom": "20",
-    "backgroundColor": "#ffffff"
-  },
-  "panel-wallet": {
-    "flexDirection": "row",
-    "alignItems": "center",
-    "height": "160"
-  },
-  "my-wallet": {
-    "width": "240",
-    "height": "160",
-    "lineHeight": "160",
-    "textAlign": "center",
-    "color": "#333333",
-    "borderRightWidth": "1",
-    "borderRightStyle": "solid",
-    "borderRightColor": "#dddddd"
-  },
-  "my-integral": {
-    "flex": 1,
-    "alignItems": "center"
-  },
-  "order-status": {
-    "flexDirection": "row",
-    "alignItems": "center",
-    "height": "160"
-  },
-  "order-status-item": {
-    "alignItems": "center",
-    "justifyContent": "center",
-    "height": "160",
-    "lineHeight": "160",
-    "flex": 1
-  },
-  "page-entry-item": {
-    "flexDirection": "row",
-    "alignItems": "center",
-    "paddingTop": "30",
-    "paddingRight": "30",
-    "paddingBottom": "30",
-    "paddingLeft": "30",
-    "borderBottomWidth": "1",
-    "borderBottomStyle": "solid",
-    "borderBottomColor": "#dddddd"
-  }
-}
-
-/***/ }),
+/* 111 */,
 /* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12101,7 +11937,7 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(121)
+__vue_styles__.push(__webpack_require__(139)
 )
 
 /* script */
@@ -12138,12 +11974,7 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 121 */
-/***/ (function(module, exports) {
-
-module.exports = {}
-
-/***/ }),
+/* 121 */,
 /* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12291,7 +12122,7 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(128)
+__vue_styles__.push(__webpack_require__(138)
 )
 
 /* script */
@@ -12328,12 +12159,7 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 128 */
-/***/ (function(module, exports) {
-
-module.exports = {}
-
-/***/ }),
+/* 128 */,
 /* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12388,7 +12214,7 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(132)
+__vue_styles__.push(__webpack_require__(135)
 )
 
 /* script */
@@ -12425,24 +12251,7 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 132 */
-/***/ (function(module, exports) {
-
-module.exports = {
-  "wrapper": {
-    "width": "750",
-    "position": "absolute",
-    "top": 0,
-    "bottom": 0,
-    "left": 0,
-    "right": 0,
-    "backgroundColor": "#fafafa",
-    "fontSize": "32",
-    "fontFamily": "BlinkMacSystemFont, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif"
-  }
-}
-
-/***/ }),
+/* 132 */,
 /* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12476,6 +12285,232 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('router-view')], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
+
+/***/ }),
+/* 135 */
+/***/ (function(module, exports) {
+
+module.exports = {
+  "wrapper": {
+    "position": "absolute",
+    "top": 0,
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "backgroundColor": "#fafafa",
+    "fontSize": "32",
+    "fontFamily": "BlinkMacSystemFont, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif"
+  },
+  "hover-shadow": {
+    "boxShadow:active": "0 0 0 1000px rgba(0,0,0,0.1) inset"
+  }
+}
+
+/***/ }),
+/* 136 */
+/***/ (function(module, exports) {
+
+module.exports = {
+  "wrapper": {
+    "position": "absolute",
+    "top": 0,
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "backgroundColor": "#fafafa",
+    "fontSize": "32",
+    "fontFamily": "BlinkMacSystemFont, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif"
+  },
+  "hover-shadow": {
+    "boxShadow:active": "0 0 0 1000px rgba(0,0,0,0.1) inset"
+  },
+  "bar-bar-item-container": {
+    "width": "750",
+    "backgroundColor": "#f2f3f4",
+    "alignItems": "center",
+    "justifyContent": "center"
+  }
+}
+
+/***/ }),
+/* 137 */
+/***/ (function(module, exports) {
+
+module.exports = {
+  "wrapper": {
+    "position": "absolute",
+    "top": 0,
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "backgroundColor": "#fafafa",
+    "fontSize": "32",
+    "fontFamily": "BlinkMacSystemFont, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif"
+  },
+  "hover-shadow": {
+    "boxShadow:active": "0 0 0 1000px rgba(0,0,0,0.1) inset"
+  },
+  "content": {
+    "flex": 1
+  },
+  "user-info-wrap": {
+    "flexDirection": "row",
+    "alignItems": "center",
+    "width": "750",
+    "height": "240",
+    "paddingTop": 0,
+    "paddingBottom": 0,
+    "paddingLeft": "30",
+    "paddingRight": "30",
+    "backgroundColor": "#ffc900"
+  },
+  "ueser-avatar": {
+    "borderRadius": "100",
+    "marginRight": "24",
+    "overflow": "hidden"
+  },
+  "user-name-type": {
+    "flex": 1,
+    "flexDirection": "column"
+  },
+  "user-name": {
+    "color": "#ffffff"
+  },
+  "user-type": {
+    "flexDirection": "row"
+  },
+  "panel": {
+    "width": "750",
+    "marginBottom": "20",
+    "backgroundColor": "#ffffff"
+  },
+  "panel-wallet": {
+    "flexDirection": "row",
+    "alignItems": "center",
+    "height": "160"
+  },
+  "my-wallet": {
+    "width": "240",
+    "height": "160",
+    "lineHeight": "160",
+    "textAlign": "center",
+    "color": "#333333",
+    "borderRightWidth": "1",
+    "borderRightStyle": "solid",
+    "borderRightColor": "#dddddd"
+  },
+  "my-integral": {
+    "flex": 1,
+    "alignItems": "center",
+    "justifyContent": "center"
+  },
+  "order-status": {
+    "flexDirection": "row",
+    "alignItems": "center",
+    "height": "160"
+  },
+  "order-status-item": {
+    "alignItems": "center",
+    "justifyContent": "center",
+    "height": "160",
+    "lineHeight": "160",
+    "flex": 1
+  },
+  "page-entry-item": {
+    "flexDirection": "row",
+    "alignItems": "center",
+    "justifyContent": "center",
+    "paddingTop": "30",
+    "paddingBottom": "30",
+    "paddingLeft": "30",
+    "paddingRight": "30",
+    "borderBottomWidth": "1",
+    "borderBottomStyle": "solid",
+    "borderBottomColor": "#dddddd"
+  }
+}
+
+/***/ }),
+/* 138 */
+/***/ (function(module, exports) {
+
+module.exports = {}
+
+/***/ }),
+/* 139 */
+/***/ (function(module, exports) {
+
+module.exports = {}
+
+/***/ }),
+/* 140 */
+/***/ (function(module, exports) {
+
+module.exports = {
+  "wrapper": {
+    "position": "absolute",
+    "top": 0,
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "backgroundColor": "#fafafa",
+    "fontSize": "32",
+    "fontFamily": "BlinkMacSystemFont, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif"
+  },
+  "hover-shadow": {
+    "boxShadow:active": "0 0 0 1000px rgba(0,0,0,0.1) inset"
+  },
+  "wxc-city": {
+    "position": "absolute",
+    "top": 0,
+    "left": 0,
+    "bottom": 0,
+    "right": 0
+  },
+  "page": {
+    "position": "absolute",
+    "top": 0,
+    "right": 0,
+    "bottom": 0,
+    "left": 0
+  },
+  "header-right": {
+    "flexDirection": "row"
+  },
+  "content": {
+    "width": "750",
+    "flex": 1
+  },
+  "tab-page-item-container": {
+    "width": "750",
+    "backgroundColor": "#f2f3f4"
+  },
+  "slider": {
+    "width": "750",
+    "height": "360"
+  },
+  "slider-image": {
+    "width": "750",
+    "height": "360"
+  },
+  "frame": {
+    "width": "750",
+    "height": "360"
+  },
+  "border-cell": {
+    "backgroundColor": "#f2f3f4",
+    "width": "750",
+    "height": "24",
+    "alignItems": "center",
+    "justifyContent": "center",
+    "borderBottomWidth": "1",
+    "borderStyle": "solid",
+    "borderColor": "#e0e0e0"
+  },
+  "cell": {
+    "backgroundColor": "#ffffff"
+  }
+}
 
 /***/ })
 /******/ ]);
