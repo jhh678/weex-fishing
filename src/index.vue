@@ -16,7 +16,7 @@
 
 </script>
 
-<style scoped lang="stylus">
-  @import "./css/common.styl";
+<style scoped lang="scss">
+  @import "./css/common.scss";
 
 </style>

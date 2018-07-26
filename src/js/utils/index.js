@@ -10,7 +10,11 @@ import {
 const navigationBar = weex.requireModule('navigationBar')
 const navigator = weex.requireModule('navigator')
 
-export function setTitle(title) {
+/**
+ * 设置顶部导航栏标题
+ * @param {String} title - 标题，必传
+ */
+export const setTitle = (title) => {
   if (navigationBar && navigationBar.setTitle) {
     const NOOP = () => {}
     navigationBar.setTitle({
@@ -31,6 +35,13 @@ export function setTitle(title) {
       }]
     }, CALLBACK, NOOP)
   }
+}
+
+/**
+ * 获取页面高度
+ */
+export const getPageHeight = () => {
+  return weex.config.env.deviceHeight / weex.config.env.deviceWidth * 750
 }
 
 /**

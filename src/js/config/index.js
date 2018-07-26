@@ -1,3 +1,16 @@
+let baseUrl = 'http://rapapi.org/mockjsdata/35827'
+let apiUrls = {
+  getIndexGoods: '/shop/index/getGoods'
+}
+
+export const apiConfig = {
+  urls: ((urls) => {
+    urls.keys.map((item) => {
+      urls[item] = baseUrl + urls[item]
+    })
+  })(apiUrls)
+}
+
 /**
  * Created by jhh678 on 2018/07/14.
  */
