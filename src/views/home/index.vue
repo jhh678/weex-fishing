@@ -110,6 +110,16 @@
       // 如果页面没有导航栏，可以用下面这个计算高度的方法
       // const tabPageHeight = env.deviceHeight / env.deviceWidth * 750;
       this.tabPageHeight = getPageHeight() - tabBarConfig.tabStyles.height - 90
+
+      this.$api('getIndexGoods').post({
+        page: 2,
+        rows: 20,
+        handleError: true
+      }).then((data) => {
+        console.log(data)
+      }, (err) => {
+        console.log(err)
+      })
     },
     mounted() {
       // 模拟定位

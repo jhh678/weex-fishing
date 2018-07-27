@@ -1,11 +1,8 @@
+import qs from 'qs'
 import {
   apiConfig
 } from '@/js/config/index'
 
-// 引入 弹窗组件
-let modal = weex.requireModule('modal')
-// 引入 请求数据组件
-let stream = weex.requireModule('stream')
 // 身份验证
 // import jwtdecode from 'jwt-simple'
 
@@ -31,79 +28,99 @@ function filterNull(o) {
   return o
 }
 
-// 工具方法
-function toParams(obj) {
-  var param = ""
-  for (const name in obj) {
-    if (typeof obj[name] != 'function') {
-      param += "&" + name + "=" + encodeURI(obj[name])
+function responseHandle(resolve, reject, res, handleError) {
+  // 引入 弹窗组件
+  let modal = weex.requireModule('modal')
+  console.log('GET res :' + res)
+  if (res.ok) {
+    if (res.data && res.data.code === 200) {
+      resolve(res.data.data)
+    } else {
+      if (handleError) {
+        reject(res.data)
+      } else {
+        let msg = res.data.msg || '请求失败，请稍后再试...'
+        modal.toast({
+          message: msg,
+          duration: 3
+        })
+      }
     }
+  } else {
+    let msg = res.statusText || '请求失败，请稍后再试...'
+    modal.toast({
+      message: msg,
+      duration: 3
+    })
   }
-  return param.substring(1)
-};
+}
 
 /**
  * 接口处理函数
  */
-function apiStream(method, url, params, success, failure) {
+function apiStream(method, url, params, handleError, progressCallback) {
+  // 引入 请求数据组件
+  let stream = weex.requireModule('stream')
   // 过滤参数
   if (params) {
     params = filterNull(params)
   }
 
-  /*** stream ***/
+  /**
+   * stream
+   */
   if (method === 'GET') {
     // GET 方法
-    stream.fetch({
-      method: 'GET',
-      type: 'text',
-      url: baseUrl + url + toParams(params)
-    }, function (res) {
-      if (res.ok) {
-        // 解密
-        // let currentData = jwtdecode.decode(res.data, 'michahzdee2016', 'HS256')
-        // success(currentData);
-        success(res.data);
-      } else {
-        modal.toast({
-          message: '请求失败,请检查网络!',
-          duration: 2
-        })
-      }
+    let getStream = new Promise((resolve, reject) => {
+      stream.fetch({
+        method: 'GET',
+        url: `${url}?${qs.stringify(params)}`,
+        type: 'json'
+      }, res => {
+        responseHandle(resolve, reject, res, handleError)
+      }, progress => {
+        progressCallback && progressCallback(progress)
+      })
     })
+
+    return getStream
   } else if (method === 'POST') {
     // POST 方法
-    stream.fetch({
-      method: 'POST',
-      type: 'text',
-      url: baseUrl + url,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: toParams(params)
-    }, function (res) {
-      if (res.ok) {
-        // 解密
-        let currentData = jwtdecode.decode(res.data, 'michahzdee2016', 'HS256');
-        success(currentData);
-      } else {
-        modal.toast({
-          message: '请求失败,请检查网络!',
-          duration: 2
-        })
-      }
-    }, function (progress) {
-      //
+    let postStream = new Promise((resolve, reject) => {
+      stream.fetch({
+        method: 'POST',
+        url: url,
+        type: 'json',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: JSON.stringify(params)
+      }, res => {
+        responseHandle(resolve, reject, res, handleError)
+      }, progress => {
+        progressCallback && progressCallback(progress)
+      })
     })
+
+    return postStream
+  }
+}
+
+const api = (urlKey) => {
+  let url = apiConfig.urls[urlKey]
+  return {
+    get: function (params, handleError, progressCallback) {
+      return apiStream('GET', url, params, handleError, progressCallback)
+    },
+    post: function (params, handleError, progressCallback) {
+      return apiStream('POST', url, params, handleError, progressCallback)
+    }
   }
 }
 
 // 返回在vue模板中的调用接口
 export default {
-  get: function (url, params, success, failure) {
-    return apiStream('GET', url, params, success, failure)
-  },
-  post: function (url, params, success, failure) {
-    return apiStream('POST', url, params, success, failure)
+  install(Vue, options) {
+    Vue.prototype.$api = api
   }
 }

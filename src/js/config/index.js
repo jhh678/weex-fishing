@@ -5,9 +5,10 @@ let apiUrls = {
 
 export const apiConfig = {
   urls: ((urls) => {
-    urls.keys.map((item) => {
+    Object.keys(urls).map((item) => {
       urls[item] = baseUrl + urls[item]
     })
+    return urls
   })(apiUrls)
 }
 
