@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
-    <wxc-tab-bar :tab-titles="tabBarTitles" :tab-styles="tabBarStyles" title-type="icon" @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
+    <wxc-tab-bar :tab-titles="tabBarTitles" :tab-styles="tabBarStyles" title-type="icon" @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected"
+      ref="wxc-tab-bar">
       <div v-for="(item, index) in tabPageList" :key="index" class="bar-bar-item-container" :style="contentStyle">
         <div :is="item"></div>
       </div>
@@ -13,8 +14,7 @@
     tabBarConfig
   } from '@/js/config'
   import {
-    WxcTabBar,
-    Utils
+    WxcTabBar
   } from 'weex-ui'
   import {
     getPageHeight
@@ -51,9 +51,14 @@
         height: (getPageHeight() - this.tabBarStyles.height) + 'px'
       }
     },
+    mounted() {
+      let index = this.$store.state.currentTabIndex
+      this.$refs['wxc-tab-bar'].setPage(index, null, false)
+    },
     methods: {
       wxcTabBarCurrentTabSelected(e) {
-        // const index = e.page
+        const index = e.page
+        this.$store.dispatch('updateTabIndex', index)
       }
     }
   }
