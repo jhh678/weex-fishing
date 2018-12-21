@@ -12,6 +12,37 @@ const navigator = weex.requireModule('navigator')
 
 /**
  * 设置顶部导航栏标题
+ * @param {String} type - 类型，选传，默认'custom'，其他可选值'blue'
+ */
+export const setStatusBarStyle = (type = 'custom') => {
+  if (Utils.env.isAndroid()) {
+    const ttyConfig = weex.requireModule('ttyConfig')
+    if (type === 'blue') {
+      ttyConfig.setStatusBarStyle({
+        style: 'light',
+        bgColor: {
+          from: '#00A0E6',
+          to: '#1C69D3',
+          opacity: 1,
+          direction: 'to right'
+        }
+      })
+    } else {
+      ttyConfig.setStatusBarStyle({
+        style: 'dark',
+        bgColor: {
+          from: '#FFFFFF',
+          to: '#FFFFFF',
+          opacity: 1,
+          direction: 'to right'
+        }
+      })
+    }
+  }
+}
+
+/**
+ * 设置顶部导航栏标题
  * @param {String} title - 标题，必传
  */
 export const setTitle = (title) => {
@@ -38,10 +69,184 @@ export const setTitle = (title) => {
 }
 
 /**
- * 获取页面高度
+ * 获取weex屏幕真实的设置高度，需要减去导航栏高度
+ * @returns {Number}
  */
 export const getPageHeight = () => {
-  return weex.config.env.deviceHeight / weex.config.env.deviceWidth * 750
+  const modal = weex.requireModule('modal')
+  const {
+    env
+  } = weex.config
+  let navHeight = 0
+  if (Utils.env.isIPhoneX()) {
+    navHeight = 176
+  } else if (Utils.env.isIOS()) {
+    navHeight = 132
+  } else if (Utils.env.isAndroid()) {
+    const ttyConfig = weex.requireModule('ttyConfig')
+    const res = ttyConfig.getBarsHeight()
+    if (res.result === 'success') {
+      navHeight = res.data.statusBarHeight
+    } else {
+      modal.toast({
+        message: res.msg,
+        duration: 3
+      })
+    }
+
+    // modal.confirm({
+    //   message: 'width:' + env.deviceWidth + ' height:' + env.deviceHeight + ' statusBarHeight:' + res.data.statusBarHeight + ' navigationBarHeight:' + res.data.navigationBarHeight
+    // })
+
+    return (env.deviceHeight - navHeight) / env.deviceWidth * 750
+  }
+
+  return env.deviceHeight / env.deviceWidth * 750 - navHeight
+}
+
+/**
+ * 封装操作storage的对象，包含设置（set）、获取（get）、删除（remove）、清空（clear）、存储项数量（length）、存储项键名的数组（keys）等方法
+ */
+const storage = weex.requireModule('storage')
+export const localStore = {
+  /**
+   * 设置localStorage的方法
+   * @param {String} key - 键，必传
+   * @param {Object | String | Number | Boolean} value - 值，必传
+   * @param {Function} callback - 值，选传, 执行操作后的回调
+   * @param {Number} time - 过期时间（单位秒），选传，默认值0（不过期）
+   */
+  set(key, value, callback = () => {}, time = 0) {
+    if (value) {
+      let expiringDate = time === 0 ? 0 : (new Date().getTime() + time * 1000)
+      if (typeof value === 'object') {
+        value = JSON.stringify(value)
+        value = 'obj-' + value
+      } else {
+        value = 'str-' + value
+      }
+      value = JSON.stringify({
+        data: value,
+        time: expiringDate
+      })
+      storage.setItem(key, value, e => {
+        if (e.result === 'success') {
+          callback(e.data)
+        }
+      })
+    }
+  },
+  /**
+   * 获取storage的方法
+   * @param {String} key - 键，必传
+   * @param {Function} callback - 值，必传, 执行操作后的回调
+   * @return {Object | String}
+   */
+  get(key, callback = () => {}) {
+    storage.getItem(key, e => {
+      let returnValue
+      if (e.result === 'success' && e.data) {
+        let store = JSON.parse(e.data)
+        let value = store.data
+        let time = +store.time
+        if ((time !== 0) && (new Date().getTime() - time > 0)) {
+          storage.removeItem(key, () => {})
+        } else {
+          if (value.indexOf('obj-') === 0) {
+            value = value.slice(4)
+            returnValue = JSON.parse(value)
+          } else if (value.indexOf('str-') === 0) {
+            returnValue = value.slice(4)
+          }
+        }
+      }
+      callback(returnValue)
+    })
+  },
+  /**
+   * 删除storage的方法
+   * @param {String} key - 键，必传
+   * @param {Function} callback - 值，选传, 执行操作后的回调
+   */
+  remove(key, callback = () => {}) {
+    if (!key) {
+      return
+    }
+    storage.removeItem(key, callback)
+  },
+  /**
+   * 清空localStorage的方法
+   * @param {Function} callback - 值，选传, 执行操作后的回调
+   */
+  clear(callback = () => {}) {
+    storage.getAllKeys(e => {
+      if (e.result === 'success') {
+        e.data.map((key) => {
+          storage.removeItem(key, () => {})
+        })
+        callback(e.data)
+      }
+    })
+  },
+  /**
+   * 返回本地存储的数据中所有存储项数量的整数
+   * @param {Function} callback - 值，选传, 执行操作后的回调
+   */
+  length(callback = () => {}) {
+    storage.length(e => {
+      if (e.result === 'success') {
+        callback(e.data)
+      }
+    })
+  },
+  /**
+   * 返回一个包含全部已存储项键名的数组
+   * @param {Function} callback - 值，选传, 执行操作后的回调
+   */
+  getAllKeys(callback = () => {}) {
+    storage.getAllKeys(e => {
+      if (e.result === 'success') {
+        callback(e.data)
+      }
+    })
+  }
+}
+
+/**
+ * 计算字符串的字节数
+ * @param {String} str - 字符串，必传
+ * @param {String} charset - 字符编码，选传
+ */
+export const getStringByteLength = (str, charset) => {
+  let total = 0,
+    charCode,
+    i,
+    len
+  charset = charset ? charset.toLowerCase() : ''
+  if (charset === 'utf-16' || charset === 'utf16') {
+    for (i = 0, len = str.length; i < len; i++) {
+      charCode = str.charCodeAt(i)
+      if (charCode <= 0xffff) {
+        total += 2
+      } else {
+        total += 4
+      }
+    }
+  } else {
+    for (i = 0, len = str.length; i < len; i++) {
+      charCode = str.charCodeAt(i)
+      if (charCode <= 0x007f) {
+        total += 1
+      } else if (charCode <= 0x07ff) {
+        total += 2
+      } else if (charCode <= 0xffff) {
+        total += 3
+      } else {
+        total += 4
+      }
+    }
+  }
+  return total
 }
 
 /**

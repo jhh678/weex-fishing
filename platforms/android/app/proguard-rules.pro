@@ -31,3 +31,8 @@
 -keep class com.taobao.weex.module.**{*;}
 -keep public class * extends com.taobao.weex.common.WXModule{*;}
 -keep public class com.taobao.weex.WXDebugTool{*;}
+
+#高德定位
+-keep class com.amap.api.location.**{*;}
+-keep class com.amap.api.fence.**{*;}
+-keep class com.autonavi.aps.amapapi.model.**{*;}

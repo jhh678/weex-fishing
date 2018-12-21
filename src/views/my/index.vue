@@ -1,183 +1,144 @@
 <template>
   <div class="wrapper">
-    <div class="header">
-      <wxc-minibar title="我的">
-        <div slot="left"></div>
-        <div slot="right"></div>
-      </wxc-minibar>
-    </div>
     <scroller :style="contentStyle">
       <div class="user-info-wrap">
-        <div class="ueser-avatar">
-          <image class="avatar" :src="userInfo.avatar" resize="cover" />
-        </div>
-        <div class="user-name-type">
+        <image class="avatar" :src="userInfo.avatar" resize="cover" @click="openUserInfo" />
+        <div class="user-name-signature" @click="openUserInfo">
           <text class="user-name">{{userInfo.name}}</text>
-          <div class="user-type">
-            <wxc-icon name="cry"></wxc-icon>
-            <text>{{userInfo.type}}</text>
-          </div>
+          <text class="user-signature">{{userInfo.signature}}</text>
         </div>
-      </div>
-      <div class="panel panel-wallet">
-        <text class="my-wallet">我的钱包</text>
-        <div class="my-integral">
-          <text class="integral-num">{{userInfo.integralNum}}</text>
-          <text class="currency">积分</text>
+        <div class="arrow-icon-wrap" @click="openUserInfo">
+          <t-icon :icon-style="{color: '#FFFFFF'}" name="more"></t-icon>
         </div>
       </div>
 
-      <div class="panel">
-        <text class="title">我的订单</text>
-        <div class="order-status">
-          <div class="order-status-item hover-shadow" v-for="(status, index) in orderStatus" :key="index" @click="openOrderList(index)">
-            <wxc-icon :name="status.iconName"></wxc-icon>
-            <text class="text">{{status.name}}</text>
-          </div>
+      <div class="user-data-wrap">
+        <div class="user-data-item hover-shadow" v-for="(item, index) in userInfo.data" :key="index" @click="openPage(item)">
+          <text class="user-data-num">{{item.num}}</text>
+          <text class="user-data-title">{{item.title}}</text>
         </div>
       </div>
 
-      <div class="panel">
-        <div class="page-entry-item hover-shadow" v-for="(item, index) in pageEntrys" :key="index" @click="openPage(item)">
-          <wxc-icon :icon-style="item.iconStyle" :name="item.iconName"></wxc-icon>
-          <text class="entry-name">{{item.entryName}}</text>
-          <wxc-icon name="more"></wxc-icon>
-        </div>
+      <div class="">
+        <t-cell v-for="(item, index) in pageEntrys" :key="index" :title="item.entryName" :extra-content="item.extraContent" :has-arrow="true"
+          :has-bottom-line="item.hasBottomLine" :has-margin="item.hasMargin" @cellClicked="openPage(item)">
+          <t-icon slot="label" :icon-style="item.iconStyle" :name="item.iconName"></t-icon>
+        </t-cell>
       </div>
     </scroller>
   </div>
 </template>
 
 <script>
+  import TCell from '@/components/cell'
+  import TIcon from '@/components/icon'
   import {
-    WxcMinibar,
-    WxcIcon,
-    WxcCell,
-    Utils
-  } from 'weex-ui'
-  import {
-    getPageHeight
+    localStore,
+    setStatusBarStyle
   } from '@/js/utils/index'
 
   export default {
-    name: 'HomeIndex',
+    name: 'MyIndex',
     components: {
-      WxcMinibar,
-      WxcIcon,
-      WxcCell,
-      Utils
+      TCell,
+      TIcon
     },
-    data() {
-      return {
-        contentStyle: {
-          height: 0
-        },
-        userInfo: {
-          avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1533109519&di=731d03a72bb6b1180c2295fae417400f&imgtype=jpg&er=1&src=http%3A%2F%2Ftx.haiqq.com%2Fuploads%2Fallimg%2F140606%2F134G9D49-4.jpg',
-          name: '风云逐月',
-          type: '超级无敌会员',
-          integralNum: 8888
-        },
-        orderStatus: [{
-          name: '待付款',
-          iconName: 'clock'
+    data: () => ({
+      contentStyle: {
+        height: 0
+      },
+      userInfo: {
+        avatar: 'https://ttyun-image.oss-cn-shenzhen.aliyuncs.com/ttyunapp/15324807923759870.jpg',
+        name: '立即登录',
+        signature: '签名是一种态度，点击可编辑',
+        data: [{
+          title: '发布',
+          num: 0,
+          routePath: '/my/my-publish'
         }, {
-          name: '待发货',
-          iconName: 'clock'
+          title: '关注',
+          num: 0,
+          routePath: '/my/my-focus'
         }, {
-          name: '待收货',
-          iconName: 'clock'
+          title: '粉丝',
+          num: 0,
+          routePath: '/my/my-fans'
         }, {
-          name: '已完成',
-          iconName: 'clock'
-        }, {
-          name: '售后',
-          iconName: 'clock'
-        }],
-        pageEntrys: [{
-          iconStyle: {
-            color: '#ff5e00'
-          },
-          iconName: 'help',
-          entryName: '我的拼团',
-          routePath: '/my/group-buy'
-        }, {
-          iconStyle: {
-            color: '#ff5e00'
-          },
-          iconName: 'help',
-          entryName: '我的秒杀',
-          routePath: '/my/group-buy'
-        }, {
-          iconStyle: {
-            color: '#ff5e00'
-          },
-          iconName: 'help',
-          entryName: '成为分销商',
-          routePath: '/my/group-buy'
-        }, {
-          iconStyle: {
-            color: '#ff5e00'
-          },
-          iconName: 'help',
-          entryName: '我的优惠券',
-          routePath: '/my/group-buy'
-        }, {
-          iconStyle: {
-            color: '#ff5e00'
-          },
-          iconName: 'help',
-          entryName: '领券中心',
-          routePath: '/my/group-buy'
-        }, {
-          iconStyle: {
-            color: '#ff5e00'
-          },
-          iconName: 'help',
-          entryName: '我的收藏',
-          routePath: '/my/group-buy'
-        }, {
-          iconStyle: {
-            color: '#ff5e00'
-          },
-          iconName: 'help',
-          entryName: '收货地址',
-          routePath: '/my/group-buy'
-        }, {
-          iconStyle: {
-            color: '#ff5e00'
-          },
-          iconName: 'help',
-          entryName: '绑定手机号',
-          routePath: '/my/group-buy'
-        }, {
-          iconStyle: {
-            color: '#ff5e00'
-          },
-          iconName: 'help',
-          entryName: '商户入驻',
-          routePath: '/my/group-buy'
+          title: '消息',
+          num: 0,
+          routePath: '/my/my-message'
         }]
-      }
-    },
+      },
+      pageEntrys: [{
+        iconStyle: {
+          color: '#1C69D3'
+        },
+        iconName: 'apply_auth',
+        entryName: '申请认证',
+        routePath: '/my/apply-auth',
+        hasBottomLine: true
+      }, {
+        iconStyle: {
+          color: '#00D16F'
+        },
+        iconName: 'crop',
+        entryName: '关注作物',
+        routePath: '/my/focus-crop/index',
+        hasMargin: true
+      }, {
+        iconStyle: {
+          color: '#1C69D3'
+        },
+        iconName: 'logo',
+        entryName: '检测新版本',
+        extraContent: '1.0.1',
+        hasMargin: true
+      }, {
+        iconStyle: {
+          color: '#ff5e00'
+        },
+        iconName: 'search',
+        entryName: '结果页面演示',
+        routePath: '/result',
+        hasBottomLine: true
+      }, {
+        iconStyle: {
+          color: '#ff5e00'
+        },
+        iconName: 'search',
+        entryName: '按钮演示',
+        routePath: '/my/button-demo',
+        hasBottomLine: true
+      }, {
+        iconStyle: {
+          color: '#ff5e00'
+        },
+        iconName: 'search',
+        entryName: '对话框演示',
+        routePath: '/my/dialog-demo',
+        hasMargin: true
+      }]
+    }),
     created() {
-      this.contentStyle = {
-        height: (getPageHeight() - 210) + 'px'
-      }
+      localStore.get('contentHeight', data => {
+        this.contentStyle = {
+          height: data
+        }
+      })
+    },
+    destroyed() {
+      setStatusBarStyle()
     },
     methods: {
-      openOrderList(index) {
-        this.$router.push({
-          path: '/my/order-list',
-          query: {
-            index: index
-          }
-        })
+      openUserInfo() {
+
       },
       openPage(item) {
-        this.$router.push({
-          path: item.routePath
-        })
+        if (item.routePath) {
+          this.$router.push({
+            path: item.routePath
+          })
+        }
       }
     }
   }
@@ -191,124 +152,77 @@
     flex-direction: row;
     align-items: center;
     width: 750px;
-    height: 240px;
-    padding-top: 0;
-    padding-bottom: 0;
-    padding-left: 30px;
-    padding-right: 30px;
-    background-color: rgb(255, 201, 0);
+    height: 360px;
+    margin-bottom: 106px;
+    background-image: linear-gradient(to right, #00A0E6, #1C69D3);
   }
 
-  .ueser-avatar {
-    border-radius: 100px;
+  .avatar {
+    width: 136px;
+    height: 136px;
+    border-radius: 68px;
+    margin-left: 24px;
     margin-right: 24px;
-    overflow: hidden;
+    background-color: #CCCCCC;
   }
 
-  .ueser-avatar .avatar {
-    width: 100px;
-    height: 100px;
-    background-color: #ccc;
-  }
-
-  .user-name-type {
+  .user-name-signature {
     flex: 1;
     flex-direction: column;
+    padding-top: 18px;
+    padding-bottom: 18px;
   }
 
   .user-name {
     color: #fff;
+    font-size: 34px;
+    line-height: 42px;
   }
 
-  .user-type {
-    flex-direction: row;
-  }
-
-  .user-type text {
+  .user-signature {
     color: #fff;
-    font-size: 16px;
+    font-size: 30px;
+    line-height: 40px;
   }
 
-  .panel {
-    width: 750px;
-    margin-bottom: 20px;
-    background-color: #fff;
-  }
-
-  .panel .title {
-    height: 80px;
-    line-height: 80px;
-    padding-top: 0;
-    padding-bottom: 0;
-    padding-left: 30px;
-    padding-right: 30px;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: #ddd;
-  }
-
-  .panel-wallet {
-    flex-direction: row;
-    align-items: center;
-    height: 160px;
-  }
-
-  .my-wallet {
-    width: 240px;
-    height: 160px;
-    line-height: 160px;
-    text-align: center;
-    color: #333;
-    border-right-width: 1px;
-    border-right-style: solid;
-    border-right-color: #ddd;
-  }
-
-  .my-integral {
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .order-status {
-    flex-direction: row;
-    align-items: center;
-    height: 160px;
-  }
-
-  .order-status-item {
-    align-items: center;
-    justify-content: center;
-    height: 160px;
-    line-height: 160px;
-    flex: 1;
-  }
-
-  .order-status-item .text {
-    text-align: center;
-  }
-
-  .page-entry-item {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    padding-left: 30px;
-    padding-right: 30px;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: #ddd;
-  }
-
-  .page-entry-item .entry-name {
-    flex: 1;
-    padding-top: 0;
-    padding-bottom: 0;
-    padding-left: 24px;
+  .arrow-icon-wrap {
+    padding-top: 24px;
     padding-right: 24px;
-    text-align: left;
-    color: #333;
+    padding-bottom: 24px;
+    padding-left: 24px;
+  }
+
+  .user-data-wrap {
+    position: absolute;
+    top: 272px;
+    left: 24px;
+    width: 702px;
+    height: 170px;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-data-item {
+    flex: 1;
+    height: 170px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-data-num {
+    font-size: 34px;
+    line-height: 42px;
+    color: #333333;
+    margin-bottom: 8px;
+  }
+
+  .user-data-title {
+    font-size: 30px;
+    line-height: 40px;
+    color: #333333;
   }
 
 </style>

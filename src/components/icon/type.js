@@ -16,6 +16,8 @@ export default {
   post: '\ue7f7',
   'find_selected': '\ue7f8',
   'find_default': '\ue7f9',
+  'my_default': '\ue7fa',
+  'my_selected': '\ue7fb',
   location: '\ue7fc',
   'link_default': '\ue7fd',
   'link_selected': '\ue7fe',
@@ -25,5 +27,13 @@ export default {
   'apply_auth': '\ue802',
   crop: '\ue803',
   logo: '\ue804',
-  'auth_pass': '\ue805'
+  'auth_pass': '\ue805',
+  'info_success': '\ue806',
+  'post_link': '\ue807',
+  'question_bg': '\ue809',
+  close: '\ue80a',
+  'tty_logo': '\ue808',
+  message: '\ue80b',
+  'arrow_up': '\ue80c',
+  question: '\ue80d'
 }

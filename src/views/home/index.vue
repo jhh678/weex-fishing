@@ -1,20 +1,19 @@
 <template>
   <div class="wrapper">
-    <wxc-city ref="wxcCityPush" class="wxc-city" :currentLocation="location" :cityStyleType="cityStyleType" @wxcCityItemSelected="citySelect"
-      @wxcCityOnInput="onInput"></wxc-city>
     <div class="page">
       <div class="header">
-        <wxc-minibar title="首页" :use-default-return="false" @wxcMinibarLeftButtonClicked="minibarLeftButtonClick" @wxcMinibarRightButtonClicked="minibarRightButtonClick">
-          <wxc-icon name="scanning" slot="left"></wxc-icon>
-          <div slot="right" class="header-right">
-            <wxc-icon name="map"></wxc-icon>
-            <text>{{currentCity}}</text>
+        <t-minibar :use-default-return="false" @minibarLeftButtonClicked="minibarLeftButtonClick">
+          <div class="header-left" slot="left">
+            <text class="location-text">{{currentCity}}</text>
+            <t-icon v-if="currentCity" name="arrow_down"></t-icon>
           </div>
-        </wxc-minibar>
+          <!-- <text slot="middle" class="header-middle">{{orgName}}</text> -->
+          <image slot="middle" :src="ttyLogoName" class="header-middle"></image>
+        </t-minibar>
       </div>
       <div class="content">
-        <wxc-tab-page ref="wxc-tab-page" :tab-titles="tabPageTitles" :tab-styles="tabPageStyles" title-type="icon" :needSlider="needSlider"
-          :is-tab-view="isTabView" :tab-page-height="tabPageHeight" @wxcTabPageCurrentTabSelected="wxcTabPageCurrentTabSelected">
+        <t-tab-page ref="tty-tab-page" :tab-titles="tabPageTitles" :tab-styles="tabPageStyles" title-type="icon" :needSlider="needSlider"
+          :is-tab-view="isTabView" :tab-page-height="tabPageHeight" @tabPageCurrentTabSelected="wxcTabPageCurrentTabSelected">
           <list v-for="(v,index) in tabPageList" :key="index" class="tab-page-item-container" :style="{ height: (tabPageHeight - tabPageStyles.height) + 'px' }">
             <cell class="border-cell"></cell>
             <cell>
@@ -32,7 +31,8 @@
               </wxc-pan-item>
             </cell>
           </list>
-        </wxc-tab-page>
+        </t-tab-page>
+        <image class="question" :src="questionBg" @click="questionClicked"></image>
       </div>
     </div>
   </div>
@@ -44,66 +44,67 @@
     tabBarConfig
   } from '@/js/config'
   import {
-    WxcMinibar,
-    WxcTabPage,
     WxcPanItem,
-    WxcIcon,
-    WxcCity,
     Utils,
     BindEnv
   } from 'weex-ui'
   import {
     getPageHeight
   } from '@/js/utils/index'
+  import TMinibar from '@/components/minibar'
+  import TTabPage from '@/components/tab-page'
+  import TIcon from '@/components/icon'
   import WxcItem from '@/components/wxc-item.vue'
-  const modal = weex.requireModule('modal')
-  const ttyScan = weex.requireModule('tty-scan')
+  import {
+    ttyLogoName,
+    questionBg
+  } from '@/js/config/image-base64'
 
   export default {
     name: 'HomeIndex',
     components: {
-      WxcMinibar,
-      WxcTabPage,
+      TMinibar,
+      TTabPage,
       WxcPanItem,
       WxcItem,
-      WxcIcon,
-      WxcCity
+      TIcon
     },
-    data() {
-      return {
-        tabPageTitles: tabPageConfig.tabTitles,
-        tabPageStyles: tabPageConfig.tabStyles,
-        imageList: [{
-            src: 'https://gd2.alicdn.com/bao/uploaded/i2/T14H1LFwBcXXXXXXXX_!!0-item_pic.jpg'
-          },
-          {
-            src: 'https://gd1.alicdn.com/bao/uploaded/i1/TB1PXJCJFXXXXciXFXXXXXXXXXX_!!0-item_pic.jpg'
-          },
-          {
-            src: 'https://gd3.alicdn.com/bao/uploaded/i3/TB1x6hYLXXXXXazXVXXXXXXXXXX_!!0-item_pic.jpg'
-          }
-        ],
-        tabPageList: [],
-        needSlider: true,
-        demoList: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-        supportSlide: true,
-        isTabView: true,
-        tabPageHeight: 10000,
-        desc: [{
-          type: 'text',
-          value: '特价机票|班期:清明 3/27-4/2等',
-          theme: 'gray'
-        }],
-        tags: [{
-          type: 'tag',
-          value: '满100减20测试',
-          theme: 'yellow'
-        }],
-        currentCity: '',
-        cityStyleType: 'group',
-        location: '定位中'
-      }
-    },
+    data: () => ({
+      orgName: '田田云',
+      tabPageTitles: tabPageConfig.tabTitles,
+      tabPageStyles: tabPageConfig.tabStyles,
+      imageList: [{
+          src: 'https://gd2.alicdn.com/bao/uploaded/i2/T14H1LFwBcXXXXXXXX_!!0-item_pic.jpg'
+        },
+        {
+          src: 'https://gd1.alicdn.com/bao/uploaded/i1/TB1PXJCJFXXXXciXFXXXXXXXXXX_!!0-item_pic.jpg'
+        },
+        {
+          src: 'https://gd3.alicdn.com/bao/uploaded/i3/TB1x6hYLXXXXXazXVXXXXXXXXXX_!!0-item_pic.jpg'
+        }
+      ],
+      tabPageList: [],
+      needSlider: true,
+      demoList: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      supportSlide: true,
+      isTabView: true,
+      tabPageHeight: 10000,
+      desc: [{
+        type: 'text',
+        value: '特价机票|班期:清明 3/27-4/2等',
+        theme: 'gray'
+      }],
+      tags: [{
+        type: 'tag',
+        value: '满100减20测试',
+        theme: 'yellow'
+      }],
+      currentCity: '',
+      cityStyleType: 'group',
+      location: '定位中',
+      ttyLogoName: ttyLogoName,
+      questionBg: questionBg
+    }),
     created() {
       this.tabPageList = [...Array(this.tabPageTitles.length).keys()].map(i => [])
       this.$set(this.tabPageList, 0, this.demoList)
@@ -111,15 +112,15 @@
       // const tabPageHeight = env.deviceHeight / env.deviceWidth * 750;
       this.tabPageHeight = getPageHeight() - tabBarConfig.tabStyles.height - 90
 
-      this.$api('getIndexGoods').post({
-        page: 2,
-        rows: 20,
-        handleError: true
-      }).then((data) => {
-        console.log(data)
-      }, (err) => {
-        console.log(err)
-      })
+      // this.$api('getIndexGoods').post({
+      //   page: 2,
+      //   rows: 20,
+      //   handleError: true
+      // }).then((data) => {
+      //   console.log(data)
+      // }, (err) => {
+      //   console.log(err)
+      // })
     },
     mounted() {
       // 模拟定位
@@ -130,16 +131,11 @@
     },
     methods: {
       minibarLeftButtonClick() {
-        ttyScan.scanCode(res => {
-          // res 即为返回的数据
-          modal.toast({
-            message: res.data,
-            duration: 3
-          })
+        this.$store.dispatch('updateToastProps', {
+          show: true,
+          message: 'left clicked~',
+          needMask: false
         })
-      },
-      minibarRightButtonClick() {
-        this.$refs['wxcCityPush'].show()
       },
       wxcTabPageCurrentTabSelected(e) {
         const self = this
@@ -153,13 +149,15 @@
       },
       wxcPanItemPan(e) {
         if (BindEnv.supportsEBForAndroid()) {
-          this.$refs['wxc-tab-page'].bindExp(e.element)
+          this.$refs['tty-tab-page'].bindExp(e.element)
         }
       },
-      citySelect(e) {
-        this.currentCity = e.item.name
-      },
-      onInput(e) {}
+      questionClicked() {
+        this.$store.dispatch('updateToastProps', {
+          show: true,
+          message: '提问点击'
+        })
+      }
     }
   }
 
@@ -167,14 +165,6 @@
 
 <style scoped lang="scss">
   @import '../../css/common.scss';
-
-  .wxc-city {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-  }
 
   .page {
     position: absolute;
@@ -184,8 +174,22 @@
     left: 0;
   }
 
-  .header-right {
+  .header-left {
     flex-direction: row;
+  }
+
+  .location-text {
+    font-size: 28px;
+    line-height: 36px;
+    margin-right: 8px;
+  }
+
+  .header-middle {
+    position: absolute;
+    top: -16px;
+    left: 315px;
+    width: 120px;
+    height: 120px;
   }
 
   .content {
@@ -226,6 +230,14 @@
 
   .cell {
     background-color: #ffffff;
+  }
+
+  .question {
+    position: fixed;
+    width: 120px;
+    height: 120px;
+    left: 606px;
+    bottom: 122px;
   }
 
 </style>

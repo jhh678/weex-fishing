@@ -24,3 +24,15 @@ export const updateTabIndex = ({
 }, num) => {
   commit('updateTabIndex', num)
 }
+
+export const updateLoadingProps = ({
+  commit
+}, obj) => {
+  commit('updateLoadingProps', obj)
+}
+
+export const updateToastProps = ({
+  commit
+}, obj) => {
+  commit('updateToastProps', obj)
+}

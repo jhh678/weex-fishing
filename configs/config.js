@@ -8,6 +8,8 @@ const config = {
   pluginFilePath: 'plugins/plugins.js',
   // router
   routerFilePath: 'js/router/index.js',
+  // vuex
+  vuexFilePath: 'js/store/index.js',
   // common
   templateDir: '.temp',
   entryFilePath: 'entry.js',

@@ -1,18 +1,76 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:id="@+id/container"
-             android:background="#0099cc"
-             tools:context="com.alibaba.weex.com.alibaba.app.SplashActivity">
+<RelativeLayout
+  android:id="@+id/container"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@drawable/splash_bg"
+  tools:context=".SplashActivity">
 
-    <TextView android:id="@+id/fullscreen_content"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:keepScreenOn="true"
-              android:textColor="#33b5e5"
-              android:textStyle="bold"
-              android:textSize="50sp"
-              android:gravity="center"
-              android:text="@string/dummy_content"/>
-</FrameLayout>
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:layout_alignParentBottom="true"
+    android:background="@android:color/white">
+
+    <ImageView
+      android:layout_width="120dp"
+      android:layout_height="120dp"
+      android:layout_gravity="center"
+      android:src="@drawable/splash_logo"/>
+
+  </FrameLayout>
+
+  <LinearLayout
+    android:id="@+id/activity_splash_error_container_ll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F2F2"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <ImageView
+      android:layout_width="140dp"
+      android:layout_height="140dp"
+      android:layout_marginTop="124dp"
+      android:src="@mipmap/ic_launcher"/>
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="@string/net_error_intro"
+      android:textColor="#333"
+      android:textSize="17sp"/>
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="@string/net_error_hint"
+      android:textColor="#999"
+      android:textSize="14sp"/>
+
+    <TextView
+      android:id="@+id/activity_splash_refresh_tv"
+      android:layout_width="84dp"
+      android:layout_height="24dp"
+      android:layout_marginTop="24dp"
+      android:background="@drawable/splash_refresh_btn_bg"
+      android:gravity="center"
+      android:text="刷新"
+      android:textColor="#333"
+      android:textSize="12sp"/>
+
+  </LinearLayout>
+
+  <com.facebook.drawee.view.SimpleDraweeView
+    android:id="@+id/activity_splash_loading_sdv"
+    android:layout_width="@dimen/loading_size"
+    android:layout_height="@dimen/loading_size"
+    android:layout_centerInParent="true"
+    android:visibility="gone"
+    tools:visibility="visible"/>
+
+</RelativeLayout>

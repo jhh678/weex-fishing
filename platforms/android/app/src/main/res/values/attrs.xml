@@ -14,39 +14,4 @@
         <attr name="metaButtonBarStyle" format="reference"/>
         <attr name="metaButtonBarButtonStyle" format="reference"/>
     </declare-styleable>
-
-    <declare-styleable name="QRCodeView">
-        <attr name="inner_width" format="dimension"/>
-        <attr name="inner_height" format="dimension"/>
-        <attr name="inner_margintop" format="dimension"/>
-        <!-- 扫描框边角线的颜色，默认值为@android:color/white -->
-        <attr name="inner_corner_color" format="color"/>
-        <!-- 扫描框边角线的长度，默认值为20dp -->
-        <attr name="inner_corner_length" format="dimension"/>
-        <!-- 扫描框边角线的宽度，默认值为3dp -->
-        <attr name="inner_corner_width" format="dimension"/>
-        <attr name="inner_scan_bitmap" format="reference"/>
-        <!-- 扫描线从顶部移动到底部的动画时间，默认值为1000 -->
-        <attr name="qrcv_anim_time" format="integer"/>
-
-        <!-- 除去扫描框，其余部分阴影颜色，默认值为#33FFFFFF -->
-        <attr name="qrcv_mask_color" format="color"/>
-        <!-- 扫描框边角线的宽度，默认值为3dp -->
-        <attr name="qrcv_corner_size" format="color"/>
-        <!-- 扫描边框的宽度，默认值为1dp -->
-        <attr name="qrcv_border_size" format="dimension|reference"/>
-        <!-- 扫描边框的颜色，默认值为@android:color/white -->
-        <attr name="qrcv_border_color" format="color|reference"/>
-        <!-- 扫描线的网格图片资源，默认值为null -->
-        <attr name="qrcv_grid_scan_drawable" format="reference"/>
-        <!-- 扫描线距离左右边框的间距，默认值为0dp -->
-        <attr name="qrcv_scanline_margin" format="dimension|reference"/>
-        <!-- 扫描线的颜色，默认值为@android:color/white -->
-        <attr name="qrcv_scanline_color" format="color|reference"/>
-        <!-- 扫描线的宽度，默认值为1dp -->
-        <attr name="qrcv_scanline_size" format="dimension|reference"/>
-        <!-- 扫描线是否来回移动，默认值为true -->
-        <attr name="qrcv_scanline_reverse" format="boolean"/>
-    </declare-styleable>
-
 </resources>

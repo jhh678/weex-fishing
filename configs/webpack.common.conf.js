@@ -33,18 +33,20 @@ const getEntryFileContent = (source, routerpath) => {
   return entryContents;
 }
 
-const getRouterFileContent = (source) => {
+const getVuePluginFileContent = (source) => {
   const dependence = `import Vue from 'vue'\n`;
-  let routerContents = fs.readFileSync(source).toString();
-  routerContents = dependence + routerContents;
-  return routerContents;
+  let vuePluginContents = fs.readFileSync(source).toString();
+  vuePluginContents = dependence + vuePluginContents;
+  return vuePluginContents;
 }
 
 const getEntryFile = () => {
   const entryFile = path.join(vueWebTemp, config.entryFilePath)
   const routerFile = path.join(vueWebTemp, config.routerFilePath)
+  const vuexFile = path.join(vueWebTemp, config.vuexFilePath)
   fs.outputFileSync(entryFile, getEntryFileContent(helper.root(config.entryFilePath), routerFile));
-  fs.outputFileSync(routerFile, getRouterFileContent(helper.root(config.routerFilePath)));
+  fs.outputFileSync(routerFile, getVuePluginFileContent(helper.root(config.routerFilePath)));
+  fs.outputFileSync(vuexFile, getVuePluginFileContent(helper.root(config.vuexFilePath)));
   return {
     index: entryFile
   }

@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3eb4ff</color>
-    <color name="colorPrimaryDark">#3eb4ff</color>
-    <color name="colorAccent">#FF4081</color>
+  <color name="colorPrimary">#3eb4ff</color>
+  <color name="colorPrimaryDark">#3eb4ff</color>
+  <color name="colorAccent">#FF4081</color>
 
-    <color name="black_overlay">#66000000</color>
+  <color name="black_overlay">#66000000</color>
+
+  <color name="splash_gradient_end_color">#1C69D3</color>
+  <color name="splash_gradient_start_color">#00A0E6</color>
+
+  <color name="color_20percent_black">#33000000</color>
+  <color name="light_black">#191919</color>
+
 </resources>

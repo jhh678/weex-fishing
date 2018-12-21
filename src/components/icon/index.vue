@@ -1,8 +1,8 @@
-<!-- CopyRight (C) 2017-2022 Alibaba Group Holding Limited. -->
-<!-- Created by Tw93 on 17/12/25. -->
+<!-- CopyRight (C) 2017-2022 TTYun Group Holding Limited. -->
+<!-- Created by Tw93 on 18/08/06. -->
 
 <template>
-  <text class="icon-font" :style="mergeStyle" @click="itemClicked(name)">{{Icon[name]}}</text>
+  <text class="icon-font" :style="mergeStyle">{{Icon[name]}}</text>
 </template>
 
 <style scoped>
@@ -13,18 +13,19 @@
 </style>
 
 <script>
-  import Icon from './type';
+  import Icon from './type'
 
-  const dom = weex.requireModule('dom');
+  const dom = weex.requireModule('dom')
 
   export default {
+    name: 'Icon',
     props: {
       name: {
         default: 'success',
         type: String
       },
       size: {
-        default: 'small',
+        default: '',
         type: String
       },
       iconStyle: {
@@ -37,47 +38,40 @@
     }),
     beforeCreate() {
       dom.addRule('fontFace', {
-        'fontFamily': "fishingUiIconFont",
-        'src': "url('https://at.alicdn.com/t/font_754480_yggkdhl9h3c.ttf')"
-      });
+        'fontFamily': 'ttyIconFont',
+        'src': "url('https://at.alicdn.com/t/font_754480_9lnpqsa207a.ttf')"
+      })
     },
     computed: {
       mergeStyle() {
         const {
           iconStyle,
           size
-        } = this;
-        let fontSize = '48px';
+        } = this
+        let fontSize = '34px'
         switch (size) {
           case 'xs':
-            fontSize = '24px';
-            break;
+            fontSize = '24px'
+            break
           case 'small':
-            fontSize = '48px';
-            break;
+            fontSize = '30px'
+            break
           case 'medium':
-            fontSize = '72px';
-            break;
+            fontSize = '44px'
+            break
           case 'big':
-            fontSize = '128px';
-            break;
+            fontSize = '48px'
+            break
           default:
-            fontSize = '48px';
+            fontSize = '34px'
         }
         return {
-          fontFamily: 'fishingUiIconFont',
+          fontFamily: 'ttyIconFont',
           fontSize,
           ...iconStyle
         }
       }
-    },
-    methods: {
-      itemClicked(name) {
-        this.$emit('iconClicked', {
-          name
-        });
-      }
-    },
+    }
   }
 
 </script>

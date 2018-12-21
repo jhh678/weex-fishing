@@ -1,4 +1,4 @@
-let baseUrl = 'http://rapapi.org/mockjsdata/35827'
+let baseUrl = 'http://172.168.1.234:8180/mockjs/2'
 let apiUrls = {
   getIndexGoods: '/shop/index/getGoods'
 }
@@ -17,177 +17,82 @@ export const apiConfig = {
  */
 export const tabPageConfig = {
   tabTitles: [{
-      title: '热门跟团',
-      icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
-      activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
+      title: '关注'
     },
     {
-      title: '云南跟团',
-      icon: 'https://gw.alicdn.com/tfs/TB1ARoKSXXXXXc9XVXXXXXXXXXX-72-72.png',
-      activeIcon: 'https://gw.alicdn.com/tfs/TB19Z72SXXXXXamXFXXXXXXXXXX-72-72.png'
+      title: '云店'
     },
     {
-      title: '四川跟团',
-      icon: 'https://gw.alicdn.com/tfs/TB1VKMISXXXXXbyaXXXXXXXXXXX-72-72.png',
-      activeIcon: 'https://gw.alicdn.com/tfs/TB1aTgZSXXXXXazXFXXXXXXXXXX-72-72.png'
+      title: '云医'
     },
     {
-      title: '海南跟团',
-      icon: 'https://gw.alicdn.com/tfs/TB1Do3tSXXXXXXMaFXXXXXXXXXX-72-72.png',
-      activeIcon: 'https://gw.alicdn.com/tfs/TB1LiNhSpXXXXaWXXXXXXXXXXXX-72-72.png'
+      title: '云商'
     },
     {
-      title: '北京跟团',
-      icon: 'https://gw.alicdn.com/tfs/TB1jFsLSXXXXXX_aXXXXXXXXXXX-72-72.png',
-      activeIcon: 'https://gw.alicdn.com/tfs/TB1_Kc.SXXXXXa8XpXXXXXXXXXX-72-72.png'
-    },
-    {
-      title: '出境跟团',
-      icon: 'https://gw.alicdn.com/tfs/TB199sPSXXXXXb4XVXXXXXXXXXX-72-72.png',
-      activeIcon: 'https://gw.alicdn.com/tfs/TB1DR.3SXXXXXc2XpXXXXXXXXXX-72-72.png'
-    }, {
-      title: '出境日游',
-      icon: 'https://gw.alicdn.com/tfs/TB1hedfSpXXXXchXXXXXXXXXXXX-72-72.png',
-      activeIcon: 'https://gw.alicdn.com/tfs/TB1mrXaSpXXXXaqXpXXXXXXXXXX-72-72.png'
-    },
-    {
-      title: '邮轮',
-      icon: 'https://gw.alicdn.com/tfs/TB1twhkSpXXXXXLXXXXXXXXXXXX-72-72.png',
-      activeIcon: 'https://gw.alicdn.com/tfs/TB1dhlhSpXXXXa8XXXXXXXXXXXX-72-72.png'
+      title: '云服'
     }
   ],
   tabStyles: {
     bgColor: '#FFFFFF',
-    titleColor: '#666666',
-    activeTitleColor: '#3D3D3D',
+    titleColor: '#333333',
+    activeTitleColor: '#1C69D3',
     activeBgColor: '#FFFFFF',
-    isActiveTitleBold: true,
-    iconWidth: 70,
-    iconHeight: 70,
-    width: 160,
-    height: 120,
-    fontSize: 24,
+    isActiveTitleBold: false,
+    width: 150,
+    height: 88,
+    fontSize: 34,
     hasActiveBottom: true,
-    activeBottomColor: '#FFC900',
+    activeBottomColor: '#1C69D3',
     activeBottomHeight: 6,
-    activeBottomWidth: 120,
+    activeBottomWidth: 68,
     textPaddingLeft: 10,
     textPaddingRight: 10
-  },
-  // 使用 iconfont 模式的tab title配置
-  tabIconFontTitles: [{
-      title: '首页',
-      codePoint: '\ue623'
-    },
-    {
-      title: '特别推荐',
-      codePoint: '\ue608'
-    },
-    {
-      title: '消息中心',
-      codePoint: '\ue752',
-      badge: 5
-    },
-    {
-      title: '我的主页',
-      codePoint: '\ue601',
-      dot: true
-    }
-  ],
-  tabIconFontStyles: {
-    bgColor: '#FFFFFF',
-    titleColor: '#666666',
-    activeTitleColor: '#3D3D3D',
-    activeBgColor: '#FFFFFF',
-    isActiveTitleBold: true,
-    width: 160,
-    height: 120,
-    fontSize: 24,
-    textPaddingLeft: 10,
-    textPaddingRight: 10,
-    iconFontSize: 50,
-    iconFontColor: '#333333',
-    iconFontMarginBottom: 8,
-    activeIconFontColor: 'red',
-    iconFontUrl: '//at.alicdn.com/t/font_501019_mauqv15evc1pp66r.ttf'
   }
 }
 
 export const tabBarConfig = {
   // 正常模式的tab title配置
   tabTitles: [{
+      isPage: true,
       title: '首页',
-      icon: 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
-      activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png'
+      icon: 'home_default',
+      activeIcon: 'home_selected'
     },
     {
-      title: '特别推荐',
-      icon: 'https://gw.alicdn.com/tfs/TB1ARoKSXXXXXc9XVXXXXXXXXXX-72-72.png',
-      activeIcon: 'https://gw.alicdn.com/tfs/TB19Z72SXXXXXamXFXXXXXXXXXX-72-72.png'
+      isPage: true,
+      title: '视频',
+      icon: 'video_default',
+      activeIcon: 'video_selected'
     },
     {
-      title: '消息中心',
-      icon: 'https://gw.alicdn.com/tfs/TB1VKMISXXXXXbyaXXXXXXXXXXX-72-72.png',
-      activeIcon: 'https://gw.alicdn.com/tfs/TB1aTgZSXXXXXazXFXXXXXXXXXX-72-72.png',
-      badge: 5
+      isPage: false,
+      title: '发帖',
+      icon: 'post'
     },
     {
-      title: '我的主页',
-      icon: 'https://gw.alicdn.com/tfs/TB1Do3tSXXXXXXMaFXXXXXXXXXX-72-72.png',
-      activeIcon: 'https://gw.alicdn.com/tfs/TB1LiNhSpXXXXaWXXXXXXXXXXXX-72-72.png',
-      dot: true
+      isPage: true,
+      title: '发现',
+      icon: 'find_default',
+      activeIcon: 'find_selected'
+    },
+    {
+      isPage: true,
+      title: '我的',
+      icon: 'my_default',
+      activeIcon: 'my_selected'
     }
   ],
   tabStyles: {
-    bgColor: '#FFFFFF',
+    bgColor: '#FAFAFA',
     titleColor: '#666666',
-    activeTitleColor: '#3D3D3D',
-    activeBgColor: '#FFFFFF',
-    isActiveTitleBold: true,
+    activeTitleColor: '#666666',
+    activeBgColor: '#FAFAFA',
     iconWidth: 70,
     iconHeight: 70,
-    width: 160,
-    height: 120,
-    fontSize: 24,
+    width: 150,
+    height: 98,
+    fontSize: 20,
     textPaddingLeft: 10,
     textPaddingRight: 10
-  },
-
-  // 使用 iconFont 模式的tab title配置
-  tabIconFontTitles: [{
-      title: '首页',
-      codePoint: '\ue623'
-    },
-    {
-      title: '特别推荐',
-      codePoint: '\ue608'
-    },
-    {
-      title: '消息中心',
-      codePoint: '\ue752',
-      badge: 5
-    },
-    {
-      title: '我的主页',
-      codePoint: '\ue601',
-      dot: true
-    }
-  ],
-  tabIconFontStyles: {
-    bgColor: '#FFFFFF',
-    titleColor: '#666666',
-    activeTitleColor: '#3D3D3D',
-    activeBgColor: '#FFFFFF',
-    isActiveTitleBold: true,
-    width: 160,
-    height: 120,
-    fontSize: 24,
-    textPaddingLeft: 10,
-    textPaddingRight: 10,
-    iconFontSize: 50,
-    iconFontMarginBottom: 8,
-    iconFontColor: '#333333',
-    activeIconFontColor: 'red',
-    iconFontUrl: '//at.alicdn.com/t/font_501019_mauqv15evc1pp66r.ttf'
   }
 }
